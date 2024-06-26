@@ -1,0 +1,86 @@
+{
+    "spendings": {
+        "food": [
+            {
+                "id": 1,
+                "name": "Burger King",
+                "amount": 200
+            },
+            {
+                "id": 2,
+                "name": "Lidl",
+                "amount": 300
+            },
+            {
+                "id": 3,
+                "name": "KFC",
+                "amount": 150
+            },
+            {
+                "id": 2,
+                "name": "Biedronka",
+                "amount": 300
+            }
+        ],
+        "entertainment": [
+            {
+                "id": 1,
+                "name": "Cinema",
+                "amount": 200
+            },
+            {
+                "id": 2,
+                "name": "Theatre",
+                "amount": 300
+            },
+            {
+                "id": 3,
+                "name": "Concert",
+                "amount": 150
+            }
+        ],
+        "other": [
+            {
+                "id": 1,
+                "name": "Gas",
+                "amount": 500
+            }
+        ]
+    },
+    "payments": {
+        "bills": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "amount": 200
+            },
+            {
+                "id": 2,
+                "name": "Water",
+                "amount": 300
+            },
+            {
+                "id": 3,
+                "name": "Gas",
+                "amount": 150
+            }
+        ],
+        "loans": [
+            {
+                "id": 1,
+                "name": "Bank",
+                "amount": 200
+            },
+            {
+                "id": 2,
+                "name": "Friend",
+                "amount": 300
+            },
+            {
+                "id": 3,
+                "name": "Family",
+                "amount": 150
+            }
+        ]
+    }
+}
