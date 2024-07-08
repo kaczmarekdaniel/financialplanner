@@ -1,22 +1,14 @@
-import {
-	ContextMenu,
-	ContextMenuContent,
-	ContextMenuItem,
-	ContextMenuTrigger,
-} from "@/components/ui/context-menu";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
 
 import { TrashIcon } from "@radix-ui/react-icons";
 import React from "react";
 
 type ListItemProps = {
-	result: { name: string; amount: number; id: string };
-	removeSpend: (id: string, callback: (isActive: boolean)=> void) => void;
+	name: string; amount: number; id: string
 };
 
-const ListItem: React.FC<ListItemProps> = ({ result, removeSpend  }) => {
-const [isActive, setIsActive] = React.useState(true);
+const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 
-    if (!isActive) return;
 
 	return (
 		<li
@@ -25,7 +17,7 @@ const [isActive, setIsActive] = React.useState(true);
 			<ContextMenu>
 				<ContextMenuTrigger className="w-full flex justify-between">
 					<span className="relative m-0 p-0 font-extralight">
-						{result.name}
+						{name}
 						<span
 							className="absolute left-[calc(100%+4px)] top-4  w-screen h-[.5px] bg-black dark:bg-white opacity-40"
 							aria-hidden="true"
@@ -33,13 +25,13 @@ const [isActive, setIsActive] = React.useState(true);
 					</span>
 
 					<span className="font-bold text-lg leading-snug bg-offwhite dark:bg-black pl-1 z-20">
-						{result.amount}
+						{amount}
 					</span>
 				</ContextMenuTrigger>
 				<ContextMenuContent>
 					<ContextMenuItem
 						className="cursor-pointer"
-						onClick={() => console.log("test")}
+						onClick={() => console.log("test", id)}
 					>
 						Details
 					</ContextMenuItem>
@@ -51,7 +43,6 @@ const [isActive, setIsActive] = React.useState(true);
 					</ContextMenuItem>
 
 					<ContextMenuItem
-						onClick={() => removeSpend(result.id, setIsActive)}
 						className="bg-red-100 hover:!bg-red-200 transition-colors duration-200 font-semibold flex justify-between cursor-pointer"
 					>
 						Remove
@@ -63,4 +54,4 @@ const [isActive, setIsActive] = React.useState(true);
 	);
 };
 
-export default ListItem;
+export default SpendingsItem;

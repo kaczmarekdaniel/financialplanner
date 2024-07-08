@@ -6,14 +6,13 @@ export type Spend = {
 
 export type SpendingsData = {
 	[key: string]: Spend[];
-	// entertainment: Spend[];
-	// other: Spend[];
 };
 
 export interface SpendingStore {
 	data: {
 		[key: string]: Spend[] | [];
 	}
+	getData: () => SpendingsData;
 	setSpendings: (category: string, newSpendings: Spend[]) => void;
 	updateSpendings: (category: string, newSpendings: Spend) => void;
 	setAllSpendings: (newData: SpendingsData) => void;

@@ -1,19 +1,18 @@
-import { SpendingsData } from "../spendingTypes";
 
-type fetchSpendingsType = (
-	storeHandler: (data: SpendingsData) => void,
+type fetchDataType = <T>(
+	storeHandler: (data: T) => void,
 	loadingHandler: (isLoading: boolean) => void,
 	errorHandler: (error: string) => void,
 	endpoint: string,
 	month: number,
 ) => void;
 
-const fetchSpendings: fetchSpendingsType = async (
-	storeHandler,
-	loadingHandler,
-	errorHandler,
-	endpoint,
-	month,
+const fetchData: fetchDataType = async <T>(
+	storeHandler: (data: T) => void,
+	loadingHandler: (isLoading: boolean) => void,
+	errorHandler: (error: string) => void,
+	endpoint: string,
+	month: number,
 ) => {
 	loadingHandler(true);
 	fetch(`${import.meta.env.VITE_API_URL}${endpoint}?month=${month}`, {
@@ -25,15 +24,14 @@ const fetchSpendings: fetchSpendingsType = async (
 			}
 			return response.json();
 		})
-		.then((data) => {
+		.then((data: T) => {
 			storeHandler(data);
 			loadingHandler(false);
 		})
 		.catch((error: Error) => {
 			loadingHandler(false);
-
 			errorHandler(error.message);
 		});
 };
 
-export default fetchSpendings;
+export default fetchData;
