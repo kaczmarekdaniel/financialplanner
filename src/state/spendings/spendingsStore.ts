@@ -3,12 +3,13 @@ import { Spend, SpendingStore } from "./spendingTypes";
 import { subscribeWithSelector } from "zustand/middleware";
 
 export const spendingsStore = create<SpendingStore>()(
-	subscribeWithSelector((set) => ({
+	subscribeWithSelector((set, get) => ({
 		data: {
 			food: [],
 		},
 		nested: { count: 0 },
 		loading: true,
+		getData: () => get().data,
 		setLoading: (value: boolean) => set({ loading: value }),
 		setSpendings: (key: string, value: Spend[]) =>
 			set((state) => ({
@@ -47,7 +48,7 @@ export const spendingsStore = create<SpendingStore>()(
 				data: {
 					...state.data,
 					[key]: state.data[key].map((item) =>
-						item.id === id ? newValues : item
+						item.id === id ? newValues : item,
 					),
 				},
 			})),
@@ -58,18 +59,18 @@ export const spendingsStore = create<SpendingStore>()(
 					[key]: [],
 				},
 			})),
-	}))
+	})),
 );
 
 // let initialChange = true;
 
-// spendingsStore.subscribe(
-// 	(state) => state.data,
-// 	async (data) => {
+spendingsStore.subscribe(
+	(state) => state.data,
+	async (data) => {
 
-// 			console.log(data);
-// 	}
-// );
+		console.log(data);
+	},
+);
 
 // const fetchData = async () => {
 // 	fetch(`${import.meta.env.VITE_API_URL}/spendings`, {

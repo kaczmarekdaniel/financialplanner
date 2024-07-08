@@ -4,7 +4,7 @@ import { Spend } from "@/state/spendings/spendingTypes";
 import spendingsStore from "@/state/spendings/spendingsStore";
 import { useToast } from "@/components/ui/use-toast";
 
-import ListItem from "./ListItem";
+import SpendingsItem from "./SpendingsItem.tsx";
 
 type SpendingsListProps = {
 	data: Spend[];
@@ -51,7 +51,7 @@ const SpendingsList: React.FC<SpendingsListProps> = ({ data, stateName }) => {
 	return (
 		<ul>
 			{data.map((result, i) => {
-				return <ListItem result={result} removeSpend={removeSpend} key={i}  />;
+				return <SpendingsItem result={result} removeSpend={removeSpend} key={i}  />;
 			})}
 		</ul>
 	);

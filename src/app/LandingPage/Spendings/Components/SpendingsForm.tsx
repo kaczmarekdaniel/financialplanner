@@ -7,6 +7,8 @@ import { z } from "zod";
 import { FileIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/app/components/shadcn/button";
+import { AddItemFormProps } from "@/app/components/custom/CategorySection/CategorySection.tsx";
+
 import {
 	Form,
 	FormControl,
@@ -19,17 +21,14 @@ import { Input } from "@/app/components/shadcn/input";
 import spendingsStore from "@/state/spendings/spendingsStore";
 import { useToast } from "@/components/ui/use-toast";
 
-type SpendingsFormProps = {
-	stateName: string;
-	setFormOpen: (value: boolean) => void;
-};
+
 
 const formSchema = z.object({
 	amount: z.coerce.number().int().positive("Amount must be a positive integer"),
 	name: z.string().min(3, "Name must have at least 3 characters"),
 });
 
-const SpendingsForm: React.FC<SpendingsFormProps> = ({
+const SpendingsForm: React.FC<AddItemFormProps> = ({
 	stateName,
 	setFormOpen,
 }) => {

@@ -4,21 +4,22 @@ import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 
 export const paymentsStore = create<PaymentsStore>()(
-	subscribeWithSelector((set) => ({
+	subscribeWithSelector((set, get) => ({
 		data: {
 			test: []
 		},
 		isLoading: false,
+		getData: () => get().data,
 		nested: { count: 0 },
 		setPayments: (key: string, value: Payment[]) =>
 			set((state) => ({
 				data: { ...state.data, [key]: value },
 			})),
-		setAllPayments: (newData) =>
+		setAllPayments: (data) =>
 			set((state) => ({
 				data: {
 					...state.data,
-					...newData,
+					...data,
 				},
 			})),
 

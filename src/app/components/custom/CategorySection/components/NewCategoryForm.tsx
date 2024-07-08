@@ -1,27 +1,28 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import { spendingsStore } from "@/state/spendings/spendingsStore";
 import { Button } from "@/app/components/shadcn/button";
 import { Input } from "@/app/components/shadcn/input";
-import { useState } from "react";
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from "@/app/components/shadcn/form";
+import React, { useState } from "react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/app/components/shadcn/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useStore } from "@/app/components/custom/CategorySection/helpers/store.ts";
+
+const addCategoryToStore = (storeName: string, category: string): void => {
+	const store = useStore(storeName);
+	store.getState().addCategory(category);
+};
 
 const formSchema = z.object({
 	name: z.string().min(3, "Name must have at least 3 characters"),
 });
 
-const NewCategoryForm = () => {
+type NewCategoryFormProps = {
+	storeName: string;
+};
+
+const NewCategoryForm: React.FC<NewCategoryFormProps> = ({ storeName }) => {
 	const [formOpen, setFormOpen] = useState(false);
-	const addCategory = spendingsStore((state) => state.addCategory);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -30,14 +31,14 @@ const NewCategoryForm = () => {
 		},
 	});
 
-	const formHandler = () => {
+	const toggleFormVisibility = () => {
 		setFormOpen(!formOpen);
 	};
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
-		addCategory(values.name);
-        form.reset();
+		addCategoryToStore(storeName, values.name);
+
+		form.reset();
 		setFormOpen(false); // Close the form after submission
 	}
 
@@ -61,8 +62,8 @@ const NewCategoryForm = () => {
 									<FormMessage>
 										{form.formState.errors.name && (
 											<span className="text-red-500">
-												{form.formState.errors.name.message}
-											</span>
+                        {form.formState.errors.name.message}
+                      </span>
 										)}
 									</FormMessage>
 								</FormItem>
@@ -82,7 +83,7 @@ const NewCategoryForm = () => {
 				<Button
 					variant={"outline"}
 					className="w-auto h-9 px-2 col-span-1 row-span-1 flex gap-2"
-					onClick={formHandler}
+					onClick={toggleFormVisibility}
 				>
 					Add category
 					<PlusIcon />

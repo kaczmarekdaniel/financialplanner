@@ -1,3 +1,5 @@
+import { SpendingsData } from "@/state/spendings/spendingTypes.ts";
+
 export type Payment = {
 	id: string;
 	amount: number;
@@ -19,4 +21,5 @@ export interface PaymentsStore {
 	addPayment: (category: string, newSpendings: Payment) => void;
 	updatePaid: (category: string, id: string, paid: boolean) => void;
 	nested: { count: number };
+	getData: () => SpendingsData;
 }
