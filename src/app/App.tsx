@@ -5,7 +5,6 @@ import LoginPage from "./LoginPage/LoginPage";
 import { useEffect, useState } from "react";
 import Loader from "./components/custom/Loader";
 import {
-	BrowserRouter as Router,
 	Routes,
 	Route,
 	useNavigate,
