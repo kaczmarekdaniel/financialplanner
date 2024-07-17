@@ -35,13 +35,20 @@ export const spendingsStore = create<SpendingStore>()(
 					[key]: [...(state.data[key] || []), newValues], // Append new values
 				},
 			})),
-		removeSpending: (key: string, id: string) =>
-			set((state) => ({
-				data: {
-					...state.data,
-					[key]: state.data[key].filter((item) => item.id !== id),
-				},
-			})),
+		removeSpending: (id: string) =>
+			set((state) => {
+				const newData = Object.fromEntries(
+					Object.entries(state.data).map(([key, items]) => [
+						key,
+						items.filter((item) => item.id !== id),
+					])
+				);
+
+				return {
+					data: newData,
+				};
+			}),
+
 
 		swapSpendings: (key: string, id: string, newValues: Spend) =>
 			set((state) => ({

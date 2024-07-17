@@ -68,7 +68,7 @@ const SpendingsForm: React.FC<AddItemFormProps> = ({
 				swapSpendings(stateName, itemID, { ...data.data });
 			})
 			.catch((error: Error) => {
-				removeSpending(stateName, itemID);
+				removeSpending(itemID);
 				toast({
 					variant: "destructive",
 					title: "Uoops! Something went wrong.",
