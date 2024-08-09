@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import paymentsStore from "@/state/payments/paymentsStore.ts";
 
 import Step01 from "./FormSteps/Step01";
 import Step02 from "./FormSteps/Step02";
@@ -19,14 +19,46 @@ type Step2Data = {
 	endDate: number;
 };
 
-const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen }) => {
+const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) => {
+	const addPayment = paymentsStore((state) => state.addPayment);
+
 	const [step, setStep] = useState(1);
 	const [step1Data, setStep1Data] = useState<Step1Data>({ amount: 0, name: "" });
 	const [step2Data, setStep2Data] = useState<Step2Data>({ startDate: 0, endDate: 0 });
 
 	const submitForm = () => {
-		console.log(step1Data, step2Data);
+		const itemID = Math.random().toString();
+		const formData = { ...step1Data, ...step2Data };
+		addPayment("test", { ...formData, paid: false, id: itemID });
 		setFormOpen(false);
+
+		fetch("http://localhost:3000/payments", {
+			credentials: "include", 
+			method: "POST",
+			body: JSON.stringify({
+				name: formData.name,
+				amount: formData.amount,
+				startDate: formData.startDate,
+				endDate: formData.endDate,
+				category: stateName,
+			}), // Correctly stringify the body
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("An error occurred, try again later.");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error: Error) => {
+
+				console.log(error);
+			});
 	};
 
 	useEffect(() => {

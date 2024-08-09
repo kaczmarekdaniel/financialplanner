@@ -1,4 +1,3 @@
-import React from "react";
 
 const data = {
 	labels: ["Red", "Blue", "Yellow", "Green"],

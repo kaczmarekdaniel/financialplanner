@@ -6,7 +6,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 export const paymentsStore = create<PaymentsStore>()(
 	subscribeWithSelector((set, get) => ({
 		data: {
-			test: []
+			test: [],
 		},
 		isLoading: false,
 		getData: () => get().data,
@@ -37,17 +37,44 @@ export const paymentsStore = create<PaymentsStore>()(
 					[key]: [...(state.data[key] || []), newValues],
 				},
 			})),
+		addNewPayment: (key: string, newValues: Payment) =>
+			set((state) => ({
+				data: {
+					...state.data,
+					[key]: [...(state.data[key] || []), newValues],
+				},
+			})),
 
 		updatePaid: (key: string, id: string, paid: boolean) =>
 			set((state) => ({
 				data: {
 					...state.data,
 					[key]: state.data[key].map((item) =>
-						item.id === id ? { ...item, paid: paid } : item,
+						item.id === id ? { ...item, paid: paid } : item
 					),
 				},
 			})),
-	})),
+		removePayment: (id: string) =>
+			set((state) => {
+				const newData = Object.fromEntries(
+					Object.entries(state.data).map(([key, items]) => [
+						key,
+						items.filter((item) => item.id !== id),
+					])
+				);
+
+				return {
+					data: newData,
+				};
+			}),
+		addCategory: (key: string) =>
+			set((state) => ({
+				data: {
+					...state.data,
+					[key]: [],
+				},
+			})),
+	}))
 );
 
 // paymentsStore.subscribe(

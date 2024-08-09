@@ -16,6 +16,7 @@ export type AddItemFormProps = {
 };
 
 type CategoryProps = {
+	columns?: number;
 	storeName: string;
 	title: string;
 	Item: React.ComponentType<ItemProps>;
@@ -23,15 +24,16 @@ type CategoryProps = {
 };
 
 export const SectionContext = createContext<CategoryProps>({
+	columns: 4,
 	storeName: "",
 	title: "",
 	Item: PaymentsItem,
 	Form: SpendingsForm,
 });
 
-const CategorySection: React.FC<CategoryProps> = ({ storeName, Item, Form, title }) => {
+const CategorySection: React.FC<CategoryProps> = ({ columns, storeName, Item, Form, title }) => {
 	return (
-		<SectionContext.Provider value={{ storeName, Item, Form, title }}>
+		<SectionContext.Provider value={{ columns, storeName, Item, Form, title }}>
 			<Header />
 			<Categories storeName={storeName} />
 		</SectionContext.Provider>

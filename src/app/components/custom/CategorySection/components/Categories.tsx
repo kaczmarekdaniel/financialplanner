@@ -9,12 +9,12 @@ type CategoriesProps = {
 
 
 const Categories: React.FC<CategoriesProps> = () => {
-	const { storeName } = useContext(SectionContext);
+	const { columns, storeName } = useContext(SectionContext);
 	const store = useStore(storeName);
 	const items = store((state) => state.data);
 
 	return (
-		<ul className="col-span-4 row-span-3 grid grid-cols-4 grid-rows-1 gap-x-4">
+		<ul className={`col-span-4 row-span-3 grid grid-cols-${columns} grid-rows-1 gap-x-4`}>
 			{Object.entries(items).map((item, i) => {
 				return <ItemsListing item={item} key={item[0] + i} />;
 			})}

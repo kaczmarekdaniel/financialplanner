@@ -22,4 +22,6 @@ export interface PaymentsStore {
 	updatePaid: (category: string, id: string, paid: boolean) => void;
 	nested: { count: number };
 	getData: () => SpendingsData;
+	addCategory: (category: string) => void;
+	removePayment: (id: string) => void;
 }

@@ -24,7 +24,7 @@ const PaymentsTile = () => {
 			{isLoading && <div><Loader /></div>}
 			{error && !isLoading && <p>error</p>}
 
-			<CategorySection title="Payments" storeName={"paymentsStore"} Item={PaymentsItem} Form={PaymentsForm} />
+			{!error && !isLoading && <CategorySection columns={3} title="Payments" storeName={"paymentsStore"} Item={PaymentsItem} Form={PaymentsForm} />}
 		</div>
 	);
 };
