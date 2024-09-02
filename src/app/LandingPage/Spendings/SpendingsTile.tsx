@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { spendingsStore } from "@/state/spendings/spendingsStore";
-import Loader from "@/app/components/custom/Loader";
 import appStore from "@/state/store";
 import CategorySection from "@/app/components/custom/CategorySection/CategorySection.tsx";
 
@@ -21,10 +20,9 @@ const SpendingsTile = () => {
 
 	return (
 		<div className="h-72 col-span-3 row-start-2 p-5 grid grid-cols-4 grid-rows-4">
-			{isLoading && <Loader />}
 			{error && <p>error</p>}
-			{!isLoading && !error &&
-				<CategorySection columns={4} title="Spendings" storeName={"spendingsStore"} Item={SpendingsItem} Form={SpendingsForm} />}
+			{!error &&
+				<CategorySection columns={4} contentIsLoading={isLoading} title="Spendings" storeName={"spendingsStore"} Item={SpendingsItem} Form={SpendingsForm} />}
 		</div>
 	);
 

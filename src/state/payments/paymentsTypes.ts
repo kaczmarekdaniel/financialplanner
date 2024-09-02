@@ -18,6 +18,7 @@ export interface PaymentsStore {
 	setPayments: (category: string, newSpendings: Payment[]) => void;
 	setAllPayments: (newData: PaymentsData) => void;
 	updatePayments: (category: string, newSpendings: Payment) => void;
+	overridePayments: (newData: PaymentsData) => void;
 	addPayment: (category: string, newSpendings: Payment) => void;
 	updatePaid: (category: string, id: string, paid: boolean) => void;
 	nested: { count: number };

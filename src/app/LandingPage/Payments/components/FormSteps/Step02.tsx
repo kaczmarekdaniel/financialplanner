@@ -61,7 +61,7 @@ const Step02: React.FC<PaymentsFormProps> = ({ setStep2Data, goBack, step2Data, 
 								<FormControl>
 									<DatePicker
 										setDate={(date) => {
-											handleSetDate("endDate", date);
+											handleSetDate("startDate", date);
 										}}
 										className="w-full"
 									/>
@@ -81,7 +81,7 @@ const Step02: React.FC<PaymentsFormProps> = ({ setStep2Data, goBack, step2Data, 
 								<FormControl>
 									<DatePicker
 										setDate={(date) => {
-											handleSetDate("startDate", date);
+											handleSetDate("endDate", date);
 										}}
 										className="w-full"
 									/>

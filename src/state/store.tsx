@@ -6,6 +6,13 @@ export const appStore = create<StoreState>()((set) => ({
 	month: getCurrentMonth("timestamp"),
 	setMonth: (newMonth) => set({ month: newMonth }),
 
+	offset: 0,
+	setOffset: (newOffset) => set(() => {
+        const currentDate = new Date();
+        currentDate.setMonth(currentDate.getMonth() + newOffset);
+        return { offset: newOffset, month: currentDate.getTime() };
+    }),
+
 	user: null,
 	setUser: (newUser) => set({ user: newUser }),
 
@@ -13,6 +20,9 @@ export const appStore = create<StoreState>()((set) => ({
 		darkMode: false,
 	},
 	setUI: (newUI) => set({ ui: newUI }),
+	isLoading: true,
+	setIsLoading: (newIsLoading) => set({ isLoading: newIsLoading }),
+
 }));
 
 export default appStore;

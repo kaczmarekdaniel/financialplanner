@@ -69,34 +69,13 @@ export const spendingsStore = create<SpendingStore>()(
 	})),
 );
 
-// let initialChange = true;
 
-spendingsStore.subscribe(
-	(state) => state.data,
-	async (data) => {
+// spendingsStore.subscribe(
+// 	(state) => state.data,
+// 	async (data) => {
+// 		console.log(data);
+// 	},
+// );
 
-		console.log(data);
-	},
-);
 
-// const fetchData = async () => {
-// 	fetch(`${import.meta.env.VITE_API_URL}/spendings`, {
-// 		credentials: "include",
-// 	})
-// 		.then((response) => {
-// 			if (!response.ok) {
-// 				throw new Error("An error occurred, try again later.");
-// 			}
-// 			return response.json();
-// 		})
-// 		.then((data) => {
-// 			spendingsStore.getState().setAllSpendings(data);
-// 			spendingsStore.getState().setLoading(false);
-// 		})
-// 		.catch((error: Error) => {
-// 			console.error(error.message);
-// 		});
-// };
-
-// fetchData();
 export default spendingsStore;

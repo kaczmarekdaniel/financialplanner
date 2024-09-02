@@ -29,7 +29,7 @@ const ItemsListing: React.FC<ItemsListingProps> = ({ item }) => {
 				{items.length === 0 && !formOpen && (
 					<div className="flex items-center justify-center flex-col gap-4 font-extralight">
 						<p className="text-sm">
-							looks like you don{"'"}t have any spendings in this category
+							looks like you don{"'"}t have any items in this category
 						</p>
 						<Button
 							className="w-full flex gap-3"
