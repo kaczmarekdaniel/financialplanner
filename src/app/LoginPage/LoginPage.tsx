@@ -1,29 +1,23 @@
 import { useEffect } from "react";
 import { Button } from "../components/shadcn/button";
+import { toast } from "@/components/ui/use-toast";
+import { useSearchParams } from "react-router-dom";
 
 const LoginPage = () => {
+	const [searchParams] = useSearchParams();
 	const handleOAuth = () => {
 		window.open("http://localhost:3000/api/auth/login/google", "_self");
 	};
 
 	useEffect(() => {
-		// Function to check if authentication was successful
-		const isAuthSuccessful = () => {
-			const urlParams = new URLSearchParams(window.location.search);
-			return urlParams.has("success");
-		};
-
-		// Check if authentication was successful when component mounts
-		if (isAuthSuccessful()) {
-			// Authentication was successful, you can perform further actions here
-			console.log("Authentication successful!");
-			// Example: redirect the user to a dashboard page
-			window.location.href = "/dashboard";
-		} else {
-			// Authentication was not successful
-			console.log("Authentication failed!");
+		if (searchParams.get("err")) {
+			toast({
+				variant: "destructive",
+				title: "Uoops! Something went wrong.",
+				description: "There was a problem with your request. Try again later.",
+			});
 		}
-	}, []); // Empty dependency array ensures this effect runs only once when the component mounts
+	}, []);
 
 	return (
 		<div className="max-w-[800px] max-h-screen h-full w-full mx-auto pt-20 px-10 xxl:px-0 grid grid-cols-1 grid-rows-6 ">

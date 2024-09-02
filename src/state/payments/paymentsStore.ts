@@ -5,9 +5,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 
 export const paymentsStore = create<PaymentsStore>()(
 	subscribeWithSelector((set, get) => ({
-		data: {
-			test: [],
-		},
+		data: {},
 		isLoading: false,
 		getData: () => get().data,
 		nested: { count: 0 },
@@ -20,6 +18,13 @@ export const paymentsStore = create<PaymentsStore>()(
 				data: {
 					...state.data,
 					...data,
+				},
+			})),
+		
+			overridePayments: (newData) =>
+			set(() => ({
+				data: {
+					...newData
 				},
 			})),
 

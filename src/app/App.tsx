@@ -9,12 +9,17 @@ import {
 	Routes,
 	Route,
 	useNavigate,
+	useLocation,
 } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
 	const user = appStore((state) => state.user);
+	const setIsLoading = appStore((state) => state.setIsLoading);
+	const isLoading = appStore((state) => state.isLoading);
+
 	const setUser = appStore((state) => state.setUser);
-	const [isLoading, setIsLoading] = useState(true);
+	const location = useLocation();
 
 	const navigate = useNavigate();
 
@@ -29,15 +34,12 @@ function App() {
 				} else {
 					setUser(data);
 				}
+				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.error("Error:", error);
 				setIsLoading(false);
 			});
-
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 3000);
 
 		// fetch("http://localhost:3000/spendings", {
 		// 	credentials: "include",
@@ -51,25 +53,24 @@ function App() {
 		// 	});
 	}, []);
 
-	if (isLoading)
-		return (
-			<div className="h-screen w-screen flex items-center justify-center">
-				<Loader />
-			</div>
-		);
-	if (!user) return <LoginPage />;
+	// if (isLoading)
+	// 	return (
+	// 		<div className="h-screen w-screen flex items-center justify-center">
+	// 			<Loader />
+	// 		</div>
+	// 	);
 
 	return (
-		<div className="max-w-[1200px] h-auto w-full mx-auto mt-20 px-10 xxl:px-0">
-			<Header />
-			<main>
-				<Routes>
-					<Route path="/" element={<LandingPage />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="*" element={<div>notfound </div>} />
-				</Routes>
-			</main>
-		</div>
+		<main className="max-w-[1200px] h-auto w-full mx-auto mt-14 px-10 xxl:px-0">
+			<Routes location={location} key={location.pathname}>
+				<Route path="/" element={<LandingPage />} />
+
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/error" element={<h1>error !!!11!</h1>} />
+
+				<Route path="*" element={<div>notfound </div>} />
+			</Routes>
+		</main>
 	);
 }
 

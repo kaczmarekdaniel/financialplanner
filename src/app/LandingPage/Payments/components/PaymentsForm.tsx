@@ -19,12 +19,21 @@ type Step2Data = {
 	endDate: number;
 };
 
-const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) => {
+const PaymentsForm: React.FC<PaymentsFormProps> = ({
+	setFormOpen,
+	stateName,
+}) => {
 	const addPayment = paymentsStore((state) => state.addPayment);
 
 	const [step, setStep] = useState(1);
-	const [step1Data, setStep1Data] = useState<Step1Data>({ amount: 0, name: "" });
-	const [step2Data, setStep2Data] = useState<Step2Data>({ startDate: 0, endDate: 0 });
+	const [step1Data, setStep1Data] = useState<Step1Data>({
+		amount: 0,
+		name: "",
+	});
+	const [step2Data, setStep2Data] = useState<Step2Data>({
+		startDate: 0,
+		endDate: 0,
+	});
 
 	const submitForm = () => {
 		const itemID = Math.random().toString();
@@ -33,7 +42,7 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) =
 		setFormOpen(false);
 
 		fetch("http://localhost:3000/payments", {
-			credentials: "include", 
+			credentials: "include",
 			method: "POST",
 			body: JSON.stringify({
 				name: formData.name,
@@ -41,7 +50,7 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) =
 				startDate: formData.startDate,
 				endDate: formData.endDate,
 				category: stateName,
-			}), // Correctly stringify the body
+			}), 
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -52,11 +61,8 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) =
 				}
 				return response.json();
 			})
-			.then((data) => {
-				console.log(data);
-			})
-			.catch((error: Error) => {
 
+			.catch((error: Error) => {
 				console.log(error);
 			});
 	};
@@ -84,12 +90,9 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({ setFormOpen, stateName }) =
 				goBack={() => setStep(1)}
 				submitForm={() => setStep(3)}
 				step2Data={step2Data}
-
 			/>
 		);
 	}
-
-
 };
 
 export default PaymentsForm;
