@@ -32,7 +32,7 @@ export const spendingsStore = create<SpendingStore>()(
 			set((state) => ({
 				data: {
 					...state.data,
-					[key]: [...(state.data[key] || []), newValues], // Append new values
+					[key]: [...(state.data[key] || []), newValues], 
 				},
 			})),
 		removeSpending: (id: string) =>

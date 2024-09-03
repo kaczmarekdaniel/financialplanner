@@ -38,7 +38,7 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({
 	const submitForm = () => {
 		const itemID = Math.random().toString();
 		const formData = { ...step1Data, ...step2Data };
-		addPayment("test", { ...formData, paid: false, id: itemID });
+		addPayment(stateName, { ...formData, paid: false, id: itemID });
 		setFormOpen(false);
 
 		fetch("http://localhost:3000/payments", {
