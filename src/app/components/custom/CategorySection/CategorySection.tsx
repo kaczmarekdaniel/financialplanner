@@ -63,7 +63,7 @@ const CategorySection: React.FC<CategoryProps> = ({
 						}} 
 						className={`w-11/12 col-span-4  row-span-3 grid grid-cols-${columns}`}
 					>
-						<div className="col-span-1 row-span-3 flex items-start flex-col gap-4 pr-6">
+						<div className="col-span-1 row-span-3 flex items-start flex-col gap-4 ">
 							<div className="w-full flex items-center justify-between">
 								<div className="w-20 h-7 bg-gray-300 rounded-xl"></div>
 								<div className="w-4 h-4 bg-gray-300 rounded-xl"></div>

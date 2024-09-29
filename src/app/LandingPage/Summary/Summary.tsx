@@ -1,9 +1,5 @@
 import DonutChart from "@/app/components/custom/charts/Donut.tsx";
 import SummaryList from "@/app/LandingPage/Summary/components/SummaryList.tsx";
-import { spendingsStore } from "@/state/spendings/spendingsStore.ts";
-import {paymentsStore} from "@/state/payments/paymentsStore.ts"
-import { useEffect } from "react";
-
 
 const data = {
 	labels: ["Red", "Blue", "Yellow", "Green"],
@@ -31,10 +27,7 @@ const data = {
 
 
 const Summary = () => {
-	const spendings = spendingsStore((state) => state.data);
-	const payments = paymentsStore((state) => state.data);
-
-
+	
 	return (
 		<div className="h-72 p-5 grid grid-cols-2 grid-rows-4">
 			<div className="col-span-2 row-span-1 opacity-80 ">
@@ -45,7 +38,7 @@ const Summary = () => {
 			<div className="row-start-2 row-span-3 col-span-1 flex items-center justify-center">
 				<DonutChart data={data} />
 			</div>
-			<SummaryList payments={payments} spendings={spendings} />
+			<SummaryList />
 		</div>
 	);
 };

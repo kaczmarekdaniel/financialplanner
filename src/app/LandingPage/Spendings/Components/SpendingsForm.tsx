@@ -19,6 +19,7 @@ import {
 } from "@/app/components/shadcn/form";
 import { Input } from "@/app/components/shadcn/input";
 import spendingsStore from "@/state/spendings/spendingsStore";
+import appStore from "@/state/store";
 import { useToast } from "@/components/ui/use-toast";
 
 
@@ -36,6 +37,7 @@ const SpendingsForm: React.FC<AddItemFormProps> = ({
 	const updateSpendings = spendingsStore((state) => state.updateSpendings);
 	const removeSpending = spendingsStore((state) => state.removeSpending);
 	const swapSpendings = spendingsStore((state) => state.swapSpendings);
+	const month = appStore((state) => state.month);
 
 	const { toast } = useToast();
 
@@ -46,13 +48,14 @@ const SpendingsForm: React.FC<AddItemFormProps> = ({
 		setFormOpen(false);
 
 		fetch("http://localhost:3000/spendings", {
-			credentials: "include", // Ensuring cookies are sent with the request
+			credentials: "include", 
 			method: "POST",
 			body: JSON.stringify({
 				name: values.name,
 				amount: values.amount,
 				category: stateName,
-			}), // Correctly stringify the body
+				month: month,
+			}), 
 			headers: {
 				"Content-Type": "application/json",
 			},
