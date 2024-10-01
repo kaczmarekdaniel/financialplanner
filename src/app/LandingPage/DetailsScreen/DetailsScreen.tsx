@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 import { useStore } from "@/app/components/custom/CategorySection/helpers/store";
 import { toast } from "@/components/ui/use-toast";
 
-type DetailsScreenProps = {
-	item: { storeName: string; id: string };
-};
+import { DetailsScreenProps } from "./types";
 
 const DetailsScreen: React.FC<DetailsScreenProps> = ({ item }) => {
 	const setActiveItem = appStore((store) => store.setActiveItem);

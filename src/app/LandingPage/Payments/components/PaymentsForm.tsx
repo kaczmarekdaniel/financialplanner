@@ -4,20 +4,7 @@ import paymentsStore from "@/state/payments/paymentsStore.ts";
 import Step01 from "./FormSteps/Step01";
 import Step02 from "./FormSteps/Step02";
 
-type PaymentsFormProps = {
-	stateName: string;
-	setFormOpen: (value: boolean) => void;
-};
-
-type Step1Data = {
-	amount: number;
-	name: string;
-};
-
-type Step2Data = {
-	startDate: number;
-	endDate: number;
-};
+import { Step1Data, Step2Data, PaymentsFormProps } from "../types";
 
 const PaymentsForm: React.FC<PaymentsFormProps> = ({
 	setFormOpen,
