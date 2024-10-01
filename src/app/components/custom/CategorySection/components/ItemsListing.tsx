@@ -17,7 +17,7 @@ const ItemsListing: React.FC<ItemsListingProps> = ({ item }) => {
 	return (
 		<>
 			<div
-				className={`w-full col-span-1 flex flex-col items-start justify-start gap-4 pr-6 ${!formOpen && "overflow-y-auto pr-3 "}`}
+				className={`w-full overflow-x-hidden col-span-1 flex flex-col items-start justify-start gap-4 pr-6 ${!formOpen && "overflow-y-auto pr-3 "}`}
 			>
 				<div className="w-full flex items-center justify-between">
 					<h3 className="font-bold text-xl opacity-85"> {title}</h3>

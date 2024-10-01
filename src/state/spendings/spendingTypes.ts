@@ -23,5 +23,6 @@ export interface SpendingStore {
 	removeSpending: (id: string) => void;
 	swapSpendings: (category: string, id: string, newSpendings: Spend) => void;
 	addCategory: (category: string) => void;
+	getItemById: (id: string) => Spend | undefined;
 
 }

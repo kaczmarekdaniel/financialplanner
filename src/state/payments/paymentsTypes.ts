@@ -25,4 +25,5 @@ export interface PaymentsStore {
 	getData: () => SpendingsData;
 	addCategory: (category: string) => void;
 	removePayment: (id: string) => void;
+	getItemById: (id: string) => Payment | undefined;
 }

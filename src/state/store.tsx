@@ -3,6 +3,9 @@ import StoreState from "./types";
 import { getCurrentMonth } from "./helpers/getCurrentMonth";
 
 export const appStore = create<StoreState>()((set) => ({
+	activeItem: null,
+	setActiveItem: (newActiveItem) => set({ activeItem: newActiveItem }),
+
 	month: getCurrentMonth("timestamp"),
 	setMonth: (newMonth) => set({ month: newMonth }),
 

@@ -11,6 +11,9 @@ type User = {
 
 
 type StoreState = {
+	activeItem: {storeName: string, id: string} | null;
+	setActiveItem: (newActiveItem: {storeName: string, id: string} | null) => void;
+
 	month: number | string;
 	setMonth: (newMonth: number | string) => void;
 

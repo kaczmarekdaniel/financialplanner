@@ -32,7 +32,7 @@ export const spendingsStore = create<SpendingStore>()(
 			set((state) => ({
 				data: {
 					...state.data,
-					[key]: [...(state.data[key] || []), newValues], 
+					[key]: [...(state.data[key] || []), newValues],
 				},
 			})),
 		removeSpending: (id: string) =>
@@ -49,13 +49,12 @@ export const spendingsStore = create<SpendingStore>()(
 				};
 			}),
 
-
 		swapSpendings: (key: string, id: string, newValues: Spend) =>
 			set((state) => ({
 				data: {
 					...state.data,
 					[key]: state.data[key].map((item) =>
-						item.id === id ? newValues : item,
+						item.id === id ? newValues : item
 					),
 				},
 			})),
@@ -66,9 +65,18 @@ export const spendingsStore = create<SpendingStore>()(
 					[key]: [],
 				},
 			})),
-	})),
+		getItemById: (id) => {
+			const { data } = get();
+			for (const category in data) {
+				const foundSpending = data[category].find(
+					(spending: Spend) => spending.id === id
+				);
+				if (foundSpending) return foundSpending;
+			}
+			return undefined; // Return undefined if not found
+		},
+	}))
 );
-
 
 // spendingsStore.subscribe(
 // 	(state) => state.data,
@@ -76,6 +84,5 @@ export const spendingsStore = create<SpendingStore>()(
 // 		console.log(data);
 // 	},
 // );
-
 
 export default spendingsStore;

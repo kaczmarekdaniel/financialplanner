@@ -20,11 +20,11 @@ export const paymentsStore = create<PaymentsStore>()(
 					...data,
 				},
 			})),
-		
-			overridePayments: (newData) =>
+
+		overridePayments: (newData) =>
 			set(() => ({
 				data: {
-					...newData
+					...newData,
 				},
 			})),
 
@@ -79,6 +79,15 @@ export const paymentsStore = create<PaymentsStore>()(
 					[key]: [],
 				},
 			})),
+		getItemById: (id) => {
+			const { data } = get();
+			for (const category in data) {
+				const item = data[category].find((item) => item.id === id);
+				if (item) {
+					return item;
+				}
+			}
+		},
 	}))
 );
 

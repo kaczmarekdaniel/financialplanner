@@ -1,17 +1,27 @@
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
+import {
+	ContextMenu,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 import { TrashIcon } from "@radix-ui/react-icons";
 import React, { useState } from "react";
 import { toast } from "@/components/ui/use-toast.ts";
 import spendingsStore from "@/state/spendings/spendingsStore.ts";
+import appStore from "@/state/store";
+import { motion } from "framer-motion";
 
 type ListItemProps = {
-	name: string; amount: number; id: string
+	name: string;
+	amount: number;
+	id: string;
 };
 
 const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 	const removeSpending = spendingsStore((store) => store.removeSpending);
 	const [hidden, setHidden] = useState(false);
+	const setActiveItem = appStore((store) => store.setActiveItem);
 
 	const removeSpend = (id: string) => {
 		setHidden(true);
@@ -41,18 +51,16 @@ const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 	if (hidden) return;
 
 	return (
-		<li
-			className="flex flex-row overflow-hidden justify-between items-start"
-		>
+		<motion.li layoutId={id} className="flex flex-row overflow-hidden justify-between items-start">
 			<ContextMenu>
 				<ContextMenuTrigger className="w-full flex justify-between">
-					<span className="relative m-0 p-0 font-extralight">
+					<motion.span layoutId={`title-container-${id}`} className="relative m-0 p-0 font-extralight">
 						{name}
 						<span
 							className="absolute left-[calc(100%+4px)] top-4  w-screen h-[.5px] bg-black dark:bg-white opacity-40"
 							aria-hidden="true"
 						></span>
-					</span>
+					</motion.span>
 
 					<span className="font-bold text-lg leading-snug bg-offwhite dark:bg-black pl-1 z-20">
 						{amount}
@@ -61,7 +69,7 @@ const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 				<ContextMenuContent>
 					<ContextMenuItem
 						className="cursor-pointer"
-						onClick={() => console.log("test", id)}
+						onClick={() => setActiveItem({ storeName: "spendingsStore", id })}
 					>
 						Details
 					</ContextMenuItem>
@@ -81,7 +89,7 @@ const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 					</ContextMenuItem>
 				</ContextMenuContent>
 			</ContextMenu>
-		</li>
+		</motion.li>
 	);
 };
 

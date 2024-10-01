@@ -61,7 +61,7 @@ const CategorySection: React.FC<CategoryProps> = ({
 							opacity: [.5, 0],
 							transition: { duration: 0.2 },
 						}} 
-						className={`w-11/12 col-span-4  row-span-3 grid grid-cols-${columns}`}
+						className={`w-11/12 col-span-4 overflow-x-hidden row-span-3 grid grid-cols-${columns}`}
 					>
 						<div className="col-span-1 row-span-3 flex items-start flex-col gap-4 ">
 							<div className="w-full flex items-center justify-between">
