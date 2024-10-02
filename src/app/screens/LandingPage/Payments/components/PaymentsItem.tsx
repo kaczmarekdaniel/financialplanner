@@ -40,7 +40,7 @@ const deletePayment = (id: string, apiRemoveHandler: (id: string) => void) => {
 		});
 };
 
-export const PaymentsItem: React.FC<PaymentsItemProps> = ({ id, name }) => {
+export const PaymentsItem = ({ id, name }: PaymentsItemProps): JSX.Element => {
 	const removePayment = paymentsStore((store) => store.removePayment);
 
 	return (

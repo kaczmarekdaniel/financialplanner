@@ -1,5 +1,5 @@
 import DonutChart from "@/app/components/custom/charts/Donut.tsx";
-import SummaryList from "@/app/LandingPage/Summary/components/SummaryList.tsx";
+import SummaryList from "@/app/screens/LandingPage/Summary/components/SummaryList";
 
 const data = {
 	labels: ["Red", "Blue", "Yellow", "Green"],
@@ -26,7 +26,7 @@ const data = {
 
 
 
-const Summary = () => {
+export const Summary = () => {
 	
 	return (
 		<div className="h-72 p-5 grid grid-cols-2 grid-rows-4">
@@ -42,5 +42,3 @@ const Summary = () => {
 		</div>
 	);
 };
-
-export default Summary;

@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
-import { Spend } from "@/state/spendings/spendingTypes.ts";
-import { SectionContext } from "@/app/components/custom/CategorySection/CategorySection.tsx";
-import { PlusIcon } from "@radix-ui/react-icons";
 import { Button } from "@/app/components/custom/button.tsx";
+import { SectionContext } from "@/app/components/custom/CategorySection/CategorySection.tsx";
+import { Spend } from "@/state/spendings/spendingTypes.ts";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useContext, useState } from "react";
 
 type ItemsListingProps = {
 	item: [string, Spend[]];
 };
 
-const ItemsListing: React.FC<ItemsListingProps> = ({ item }) => {
+const ItemsListing = ({ item }: ItemsListingProps): JSX.Element => {
 	const [title, items] = item;
 	const [formOpen, setFormOpen] = useState(false);
 

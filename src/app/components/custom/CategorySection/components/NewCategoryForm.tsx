@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useStore } from "@/app/components/custom/CategorySection/helpers/store.ts";
+import { useStore } from "@/hooks/useStore";
 
 const addCategoryToStore = (storeName: string, category: string): void => {
 	const store = useStore(storeName);
@@ -21,7 +21,7 @@ type NewCategoryFormProps = {
 	storeName: string;
 };
 
-const NewCategoryForm: React.FC<NewCategoryFormProps> = ({ storeName }) => {
+const NewCategoryForm = ({ storeName }: NewCategoryFormProps): JSX.Element => {
 	const [formOpen, setFormOpen] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({

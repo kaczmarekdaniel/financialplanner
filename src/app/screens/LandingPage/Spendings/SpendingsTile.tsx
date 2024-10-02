@@ -3,11 +3,11 @@ import { spendingsStore } from "@/state/spendings/spendingsStore";
 import appStore from "@/state/store";
 import CategorySection from "@/app/components/custom/CategorySection/CategorySection.tsx";
 
-import SpendingsItem from "@/app/LandingPage/Spendings/Components/SpendingsItem.tsx";
-import SpendingsForm from "@/app/LandingPage/Spendings/Components/SpendingsForm.tsx";
+import SpendingsItem from "@/app/screens/LandingPage/Spendings/Components/SpendingsItem";
+import SpendingsForm from "@/app/screens/LandingPage/Spendings/Components/SpendingsForm";
 import fetchData from "@/state/helpers/fetchData.ts";
 
-const SpendingsTile = () => {
+export const SpendingsTile = () => {
 	const overWriteSpendings = spendingsStore((state) => state.overWriteSpendings);
 	const month = appStore((state) => state.month);
 
@@ -29,4 +29,3 @@ const SpendingsTile = () => {
 
 };
 
-export default SpendingsTile;

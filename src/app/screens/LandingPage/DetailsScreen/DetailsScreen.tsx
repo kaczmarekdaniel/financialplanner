@@ -2,12 +2,12 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import appStore from "@/state/store";
 import { motion } from "framer-motion";
 
-import { useStore } from "@/app/components/custom/CategorySection/helpers/store";
+import { useStore } from "@/hooks/useStore";
 import { toast } from "@/components/ui/use-toast";
 
 import { DetailsScreenProps } from "./types";
 
-const DetailsScreen: React.FC<DetailsScreenProps> = ({ item }) => {
+export const DetailsScreen = ({ item }: DetailsScreenProps): JSX.Element => {
 	const setActiveItem = appStore((store) => store.setActiveItem);
 	const store = useStore(item.storeName);
 	const data = store((state) => state.getItemById(item.id));
@@ -18,7 +18,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({ item }) => {
 			title: "Uoops! Something went wrong.",
 			description: "This item does not exist.",
 		});
-		return;
+		return <></>;
 	}
 
 	return (
@@ -52,4 +52,3 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({ item }) => {
 	);
 };
 
-export default DetailsScreen;

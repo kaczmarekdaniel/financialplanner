@@ -1,4 +1,4 @@
-import HeaderButton from "./components/HeaderButton";
+import { HeaderButton } from "./components/HeaderButton";
 import { CalendarIcon, MoonIcon, GearIcon } from "@radix-ui/react-icons";
 import {
 	Popover,
@@ -7,10 +7,10 @@ import {
 } from "@/app/components/shadcn/popover";
 import appStore from "@/state/store";
 
-import MonthPicker from "../components/custom/MonthPicker";
+import MonthPicker from "@/app/components/custom/MonthPicker";
 import { useState } from "react";
 
-const Header = () => {
+export const Header = () => {
 	const [showPicker, setShowPicker] = useState(false);
 	const user = appStore((state) => state.user);
 
@@ -48,5 +48,3 @@ const Header = () => {
 		</header>
 	);
 };
-
-export default Header;

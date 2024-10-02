@@ -29,10 +29,8 @@ const formSchema = z.object({
 	name: z.string().min(3, "Name must have at least 3 characters"),
 });
 
-const SpendingsForm: React.FC<AddItemFormProps> = ({
-	stateName,
-	setFormOpen,
-}) => {
+const SpendingsForm = ({ stateName, setFormOpen }: AddItemFormProps): JSX.Element => {
+
 	const [filePickerOpen, setFilePickerOpen] = useState(false);
 	const updateSpendings = spendingsStore((state) => state.updateSpendings);
 	const removeSpending = spendingsStore((state) => state.removeSpending);

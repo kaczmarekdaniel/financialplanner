@@ -1,14 +1,10 @@
-import { useStore } from "@/app/components/custom/CategorySection/helpers/store.ts";
-import React, { useContext } from "react";
+import { useStore } from "@/hooks/useStore";
+import { useContext } from "react";
 import ItemsListing from "@/app/components/custom/CategorySection/components/ItemsListing.tsx";
 import { SectionContext } from "@/app/components/custom/CategorySection/CategorySection.tsx";
 import { motion } from "framer-motion";
 
-type CategoriesProps = {
-	storeName: string;
-};
-
-const Categories: React.FC<CategoriesProps> = () => {
+const Categories = () => {
 	const { columns, storeName } = useContext(SectionContext);
 	const store = useStore(storeName);
 	const items = store((state) => state.data);

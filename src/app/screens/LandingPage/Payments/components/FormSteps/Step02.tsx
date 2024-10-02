@@ -23,7 +23,7 @@ const formSchema = z.object({
 	endDate: z.coerce.number().positive(),
 });
 
-const Step02: React.FC<PaymentsFormProps> = ({ setStep2Data, goBack, step2Data, submitForm }) => {
+const Step02 = ({ setStep2Data, goBack, step2Data, submitForm }: PaymentsFormProps): JSX.Element => {
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),

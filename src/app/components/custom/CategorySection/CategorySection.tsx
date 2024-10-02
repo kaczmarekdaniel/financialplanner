@@ -1,8 +1,8 @@
 import Header from "@/app/components/custom/CategorySection/components/Header";
 import Categories from "@/app/components/custom/CategorySection/components/Categories";
 import React, { createContext } from "react";
-import { PaymentsItem } from "@/app/LandingPage/Payments/components/PaymentsItem.tsx";
-import SpendingsForm from "@/app/LandingPage/Spendings/Components/SpendingsForm.tsx";
+import { PaymentsItem } from "@/app/screens/LandingPage/Payments/components/PaymentsItem";
+import SpendingsForm from "@/app/screens/LandingPage/Spendings/Components/SpendingsForm";
 import appStore from "@/state/store";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -35,14 +35,14 @@ export const SectionContext = createContext<CategoryProps>({
 	contentIsLoading: true,
 });
 
-const CategorySection: React.FC<CategoryProps> = ({
+const CategorySection = ({
 	columns,
 	storeName,
 	Item,
 	Form,
 	title,
 	contentIsLoading,
-}) => {
+  }: CategoryProps): JSX.Element => {
 	const isLoading = appStore((state) => state.isLoading);
 
 	return (
@@ -76,7 +76,7 @@ const CategorySection: React.FC<CategoryProps> = ({
 					</motion.div>
 				)}
 			</AnimatePresence>
-			{!isLoading && !contentIsLoading && <Categories storeName={storeName} />}
+			{!isLoading && !contentIsLoading && <Categories />}
 		</SectionContext.Provider>
 	);
 };

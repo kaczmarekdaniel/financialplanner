@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Button } from "../components/shadcn/button";
+import { Button } from "@/app/components/shadcn/button";
 import { toast } from "@/components/ui/use-toast";
 import { useSearchParams } from "react-router-dom";
 
-const LoginPage = () => {
+export const LoginPage = () => {
 	const [searchParams] = useSearchParams();
 	const handleOAuth = () => {
 		window.open("http://localhost:3000/api/auth/login/google", "_self");
@@ -67,4 +67,3 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;

@@ -6,9 +6,8 @@ import {
 } from "@/components/ui/context-menu";
 
 import { TrashIcon } from "@radix-ui/react-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "@/components/ui/use-toast.ts";
-import spendingsStore from "@/state/spendings/spendingsStore.ts";
 import appStore from "@/state/store";
 import { motion } from "framer-motion";
 
@@ -18,8 +17,7 @@ type ListItemProps = {
 	id: string;
 };
 
-const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
-	const removeSpending = spendingsStore((store) => store.removeSpending);
+const SpendingsItem = ({ name, amount, id }: ListItemProps): JSX.Element => {
 	const [hidden, setHidden] = useState(false);
 	const setActiveItem = appStore((store) => store.setActiveItem);
 
@@ -36,7 +34,7 @@ const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 				return response.json();
 			})
 			.then(() => {
-				removeSpending(id);
+				removeSpend(id);
 			})
 			.catch(() => {
 				toast({
@@ -48,7 +46,7 @@ const SpendingsItem: React.FC<ListItemProps> = ({ name, amount, id }) => {
 			});
 	};
 
-	if (hidden) return;
+	if (hidden) return <></>;
 
 	return (
 		<motion.li layoutId={id} className="flex flex-row overflow-hidden justify-between items-start">

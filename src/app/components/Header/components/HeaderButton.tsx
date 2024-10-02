@@ -7,11 +7,11 @@ type HeaderButtonType = {
 	children?: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>; // Extend standard button attributes
 
-const HeaderButton: React.FC<HeaderButtonType> = ({
+export const HeaderButton = ({
 	action,
 	children,
 	...rest
-}) => {
+}: HeaderButtonType): JSX.Element => {
 	return (
 		<RoundedButton
 			type="button"
@@ -24,4 +24,3 @@ const HeaderButton: React.FC<HeaderButtonType> = ({
 	);
 };
 
-export default HeaderButton;

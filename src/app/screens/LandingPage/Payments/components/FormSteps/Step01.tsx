@@ -19,7 +19,7 @@ const formSchema = z.object({
 	name: z.string().min(3, "Name must have at least 3 characters"),
 });
 
-const Step01: React.FC<PaymentsFormProps> = ({ gotoNextStep, setStep1Data, step1Data }) => {
+const Step01 = ({ gotoNextStep, setStep1Data, step1Data }: PaymentsFormProps): JSX.Element => {
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		setStep1Data(values);
 		gotoNextStep();

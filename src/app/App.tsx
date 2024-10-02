@@ -1,22 +1,16 @@
+import { LoginPage } from "@/app/screens/LoginPage/LoginPage";
 import appStore from "@/state/store";
-import Header from "./Header/Header";
-import LandingPage from "./LandingPage/LandingPage";
-import LoginPage from "./LoginPage/LoginPage";
-import { useEffect, useState } from "react";
-import Loader from "./components/custom/Loader";
+import { useEffect } from "react";
 import {
-	BrowserRouter as Router,
-	Routes,
 	Route,
-	useNavigate,
+	Routes,
 	useLocation,
+	useNavigate,
 } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { LandingPage } from "./screens/LandingPage/LandingPage";
 
 function App() {
-	const user = appStore((state) => state.user);
 	const setIsLoading = appStore((state) => state.setIsLoading);
-	const isLoading = appStore((state) => state.isLoading);
 
 	const setUser = appStore((state) => state.setUser);
 	const location = useLocation();

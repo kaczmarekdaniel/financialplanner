@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import paymentsStore from "@/state/payments/paymentsStore.ts";
 
 import Step01 from "./FormSteps/Step01";
@@ -6,10 +6,10 @@ import Step02 from "./FormSteps/Step02";
 
 import { Step1Data, Step2Data, PaymentsFormProps } from "../types";
 
-const PaymentsForm: React.FC<PaymentsFormProps> = ({
+export const PaymentsForm = ({
 	setFormOpen,
 	stateName,
-}) => {
+}: PaymentsFormProps): JSX.Element => {
 	const addPayment = paymentsStore((state) => state.addPayment);
 
 	const [step, setStep] = useState(1);
@@ -37,7 +37,7 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({
 				startDate: formData.startDate,
 				endDate: formData.endDate,
 				category: stateName,
-			}), 
+			}),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -80,6 +80,6 @@ const PaymentsForm: React.FC<PaymentsFormProps> = ({
 			/>
 		);
 	}
-};
 
-export default PaymentsForm;
+	return <></>;
+};

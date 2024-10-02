@@ -23,7 +23,7 @@ interface DonutChartProps {
 	};
 }
 
-const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
+const DonutChart = ({ data }: DonutChartProps): JSX.Element => {
 	const options: ChartOptions<"doughnut"> = {
 		plugins: {
 			legend: {
