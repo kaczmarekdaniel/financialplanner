@@ -11,6 +11,9 @@ type User = {
 
 
 type StoreState = {
+
+	spendingsService: any;
+
 	activeItem: {storeName: string, id: string} | null;
 	setActiveItem: (newActiveItem: {storeName: string, id: string} | null) => void;
 

@@ -65,7 +65,6 @@ const SpendingsForm = ({ stateName, setFormOpen }: AddItemFormProps): JSX.Elemen
 				return response.json();
 			})
 			.then((data) => {
-				console.log(data);
 				swapSpendings(stateName, itemID, { ...data.data });
 			})
 			.catch((error: Error) => {

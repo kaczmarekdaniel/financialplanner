@@ -5,12 +5,14 @@ import { subscribeWithSelector } from "zustand/middleware";
 export const spendingsStore = create<SpendingStore>()(
 	subscribeWithSelector((set, get) => ({
 		data: {
-			food: [],
 		},
 		nested: { count: 0 },
 		loading: true,
 		getData: () => get().data,
 		setLoading: (value: boolean) => set({ loading: value }),
+		error: false,
+		setError: (message: string) => set({ error: message }),
+		resetError: () => set({ error: false }),
 		setSpendings: (key: string, value: Spend[]) =>
 			set((state) => ({
 				data: { ...state.data, [key]: value },
@@ -35,7 +37,7 @@ export const spendingsStore = create<SpendingStore>()(
 					[key]: [...(state.data[key] || []), newValues],
 				},
 			})),
-		removeSpending: (id: string) =>
+		removeSpend: (id: string) =>
 			set((state) => {
 				const newData = Object.fromEntries(
 					Object.entries(state.data).map(([key, items]) => [

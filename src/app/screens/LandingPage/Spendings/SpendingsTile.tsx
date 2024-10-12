@@ -1,31 +1,36 @@
-import { useEffect, useState } from "react";
-import { spendingsStore } from "@/state/spendings/spendingsStore";
-import appStore from "@/state/store";
 import CategorySection from "@/app/components/custom/CategorySection/CategorySection.tsx";
+import appStore from "@/state/store";
+import { useEffect } from "react";
 
-import SpendingsItem from "@/app/screens/LandingPage/Spendings/Components/SpendingsItem";
 import SpendingsForm from "@/app/screens/LandingPage/Spendings/Components/SpendingsForm";
-import fetchData from "@/state/helpers/fetchData.ts";
+import SpendingsItem from "@/app/screens/LandingPage/Spendings/Components/SpendingsItem";
+import spendingsStore from "@/state/spendings/spendingsStore";
 
 export const SpendingsTile = () => {
-	const overWriteSpendings = spendingsStore((state) => state.overWriteSpendings);
-	const month = appStore((state) => state.month);
-
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
+	const { spendingsService } = appStore();
+	const { loading, error } = spendingsStore();
 
 	useEffect(() => {
-		fetchData(overWriteSpendings, setIsLoading, setError, "/spendings", month as number);
-	}, [month]);
+		spendingsService.subscribeToSpendings();
+
+		return () => {
+			spendingsService.unsubscribeFromSpendings();
+		};
+	}, []);
 
 	return (
 		<div className="h-72 col-span-3 row-start-2 p-5 grid grid-cols-4 grid-rows-4">
 			{error && <p>error</p>}
-			{!error &&
-				<CategorySection columns={4} contentIsLoading={isLoading} title="Spendings" storeName={"spendingsStore"} Item={SpendingsItem} Form={SpendingsForm} />}
+			{!error && (
+				<CategorySection
+					columns={4}
+					contentIsLoading={loading}
+					title="Spendings"
+					storeName={"spendingsStore"}
+					Item={SpendingsItem}
+					Form={SpendingsForm}
+				/>
+			)}
 		</div>
 	);
-
-
 };
-

@@ -6,8 +6,7 @@ import {
 } from "@/components/ui/context-menu";
 
 import { TrashIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import { toast } from "@/components/ui/use-toast.ts";
+import { useEffect, useState } from "react";
 import appStore from "@/state/store";
 import { motion } from "framer-motion";
 
@@ -20,39 +19,34 @@ type ListItemProps = {
 const SpendingsItem = ({ name, amount, id }: ListItemProps): JSX.Element => {
 	const [hidden, setHidden] = useState(false);
 	const setActiveItem = appStore((store) => store.setActiveItem);
+	const { spendingsService } = appStore();
 
-	const removeSpend = (id: string) => {
+	const removeSpend = async (id: string) => {
 		setHidden(true);
-		fetch(`${import.meta.env.VITE_API_URL}/spendings/${id}`, {
-			credentials: "include",
-			method: "DELETE",
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("An error occurred, try again later.");
-				}
-				return response.json();
-			})
-			.then(() => {
-				removeSpend(id);
-			})
-			.catch(() => {
-				toast({
-					variant: "destructive",
-					title: "Uoops! Something went wrong.",
-					description: "There was a problem with your request.",
-				});
-				setHidden(false);
-			});
+			await spendingsService.removeSpend(id).catch(() => setHidden(false));
+			
 	};
+
+	useEffect(() => {
+		console.log(hidden);
+		return () => {
+			console.log("unmounted");
+		};
+	}, [hidden]);
 
 	if (hidden) return <></>;
 
 	return (
-		<motion.li layoutId={id} className="flex flex-row overflow-hidden justify-between items-start">
+		<motion.li
+			layoutId={id}
+			className="flex flex-row overflow-hidden justify-between items-start"
+		>
 			<ContextMenu>
 				<ContextMenuTrigger className="w-full flex justify-between">
-					<motion.span layoutId={`title-container-${id}`} className="relative m-0 p-0 font-extralight">
+					<motion.span
+						layoutId={`title-container-${id}`}
+						className="relative m-0 p-0 font-extralight"
+					>
 						{name}
 						<span
 							className="absolute left-[calc(100%+4px)] top-4  w-screen h-[.5px] bg-black dark:bg-white opacity-40"

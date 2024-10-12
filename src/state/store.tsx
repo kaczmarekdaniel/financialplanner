@@ -1,8 +1,11 @@
 import { create } from "zustand";
 import StoreState from "./types";
 import { getCurrentMonth } from "./helpers/getCurrentMonth";
+import { SpendingsService, errorService } from "@/utils/fetchData/fetchData";
 
 export const appStore = create<StoreState>()((set) => ({
+	spendingsService: new SpendingsService(new errorService()),
+
 	activeItem: null,
 	setActiveItem: (newActiveItem) => set({ activeItem: newActiveItem }),
 

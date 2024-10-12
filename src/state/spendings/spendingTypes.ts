@@ -20,7 +20,10 @@ export interface SpendingStore {
 	nested: { count: number },
 	loading: boolean;
 	setLoading: (value: boolean) => void;
-	removeSpending: (id: string) => void;
+	error: string | false;
+	setError: (value: string) => void;
+	resetError: () => void;
+	removeSpend: (id: string) => void;
 	swapSpendings: (category: string, id: string, newSpendings: Spend) => void;
 	addCategory: (category: string) => void;
 	getItemById: (id: string) => Spend | undefined;
