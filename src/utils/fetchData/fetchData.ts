@@ -1,8 +1,10 @@
 import { toast } from "@/components/ui/use-toast";
 import spendingsStore from "@/state/spendings/spendingsStore";
-import { Spend, SpendingsData } from "@/state/spendings/spendingTypes";
 import appStore from "@/state/store";
-import { unknown } from "zod";
+import { SpendEntity } from "@/state/spendings/types";
+
+
+
 
 type SpendDTO = {
 	id: string;
@@ -10,15 +12,25 @@ type SpendDTO = {
 	name: string;
 };
 
-const spendFromDTO = ({ id, amount, name }: SpendDTO): Spend => ({
-	id,
-	amount,
-	name,
-});
+// const spendFromDTO = ({ id, amount, name }: SpendDTO): Spend => ({
+// 	id,
+// 	amount,
+// 	name,
+// });
+
+// const spendToDTO = ({ id, amount, name }: Spend ): SpendDTO => ({
+// 	id,
+// 	amount,
+// 	name,
+// });
 
 export type SpendingsDataDTO = {
 	[key: string]: SpendDTO[];
 };
+
+type SpendingsData = {
+	[key: string]: Pick<SpendEntity, "id" | "amount" | "name">[]
+}
 
 const spendingsDataFromDTO = (data: SpendingsDataDTO): SpendingsData => {
 	return { ...data };
@@ -104,7 +116,6 @@ export class SpendingsService extends BaseHttpService {
 		} catch (error) {
 			this.handleStoreError(error);
 			this.errorService.error(error);
-
 		} finally {
 			this.spendingsStore.setLoading(false);
 		}
