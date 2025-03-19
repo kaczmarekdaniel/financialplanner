@@ -4,6 +4,7 @@ import {
 	ContextMenuItem,
 	ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import { memo } from "react";
 
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
@@ -23,29 +24,37 @@ const SpendingsItem = ({ name, amount, id }: ListItemProps): JSX.Element => {
 
 	const removeSpend = async (id: string) => {
 		setHidden(true);
-			await spendingsService.removeSpend(id).catch(() => setHidden(false));
-			
+		await spendingsService.removeSpend(id).catch(() => setHidden(false));
 	};
 
-	useEffect(() => {
-		console.log(hidden);
-		return () => {
-			console.log("unmounted");
-		};
-	}, [hidden]);
+	// useEffect(() => {
+	// 	console.log(hidden);
+	// 	return () => {
+	// 		console.log("unmounted");
+	// 	};
+	// }, [hidden]);
+
+	const scaleTranslate = ({ x, y, scaleX, scaleY }) =>
+		`scaleX(${scaleX}) scaleY(${scaleY}) translate(0,0) translateZ(0)`;
+	  
 
 	if (hidden) return <></>;
+
+	
 
 	return (
 		<motion.li
 			layoutId={id}
 			className="flex flex-row overflow-hidden justify-between items-start"
+
 		>
 			<ContextMenu>
 				<ContextMenuTrigger className="w-full flex justify-between">
 					<motion.span
 						layoutId={`title-container-${id}`}
 						className="relative m-0 p-0 font-extralight"
+			transformTemplate={scaleTranslate}
+
 					>
 						{name}
 						<span

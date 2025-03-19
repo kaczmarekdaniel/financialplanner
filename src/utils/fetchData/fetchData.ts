@@ -3,9 +3,6 @@ import spendingsStore from "@/state/spendings/spendingsStore";
 import appStore from "@/state/store";
 import { SpendEntity } from "@/state/spendings/types";
 
-
-
-
 type SpendDTO = {
 	id: string;
 	amount: number;
@@ -29,8 +26,8 @@ export type SpendingsDataDTO = {
 };
 
 type SpendingsData = {
-	[key: string]: Pick<SpendEntity, "id" | "amount" | "name">[]
-}
+	[key: string]: Pick<SpendEntity, "id" | "amount" | "name">[];
+};
 
 const spendingsDataFromDTO = (data: SpendingsDataDTO): SpendingsData => {
 	return { ...data };
@@ -102,14 +99,14 @@ export class SpendingsService extends BaseHttpService {
 	}
 
 	async getSpendings(month: number): Promise<void> {
-		this.spendingsStore.setLoading(true);
+		if (!this.spendingsStore.data) this.spendingsStore.setLoading(true);
 
 		try {
 			const responseDTO = await this.callApi<SpendingsDataDTO>(
 				HttpMethod.GET,
 				`${this.serverUrl}/spendings?month=${month}`
 			);
-
+			console.log("data fetch");
 			const response = spendingsDataFromDTO(responseDTO);
 
 			this.spendingsStore.overWriteSpendings(response);

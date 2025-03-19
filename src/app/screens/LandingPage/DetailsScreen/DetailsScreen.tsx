@@ -21,6 +21,9 @@ export const DetailsScreen = ({ item }: DetailsScreenProps): JSX.Element => {
 		return <></>;
 	}
 
+	const scaleTranslate = ({ x, y, scaleX, scaleY }) =>
+		`scaleX(${scaleX}) scaleY(${scaleY}) translate(${x}, ${y}) translateZ(0)`;
+
 	return (
 		<motion.div
 			layoutId={item.id}
@@ -37,6 +40,7 @@ export const DetailsScreen = ({ item }: DetailsScreenProps): JSX.Element => {
 			/>
 			<motion.h2
 				layoutId={`title-container-${item.id}`}
+				transformTemplate={scaleTranslate}
 				className="font-bold text-3xl opacity-85 text-center w-full col-start-3 col-span-5 row-start-2 row-span-1 "
 			>
 				{data.name}
@@ -46,9 +50,12 @@ export const DetailsScreen = ({ item }: DetailsScreenProps): JSX.Element => {
 				details
 			</div>
 			<div className="col-span-4 row-start-4 row-span-5 flex no-wrap">
-				<img className="w-full h-full object-contain" src="https://www.fakturaxl.pl/img/paragon-wzor.png" alt="receipt" />
+				<img
+					className="w-full h-full object-contain"
+					src="https://www.fakturaxl.pl/img/paragon-wzor.png"
+					alt="receipt"
+				/>
 			</div>
 		</motion.div>
 	);
 };
-

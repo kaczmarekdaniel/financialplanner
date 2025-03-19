@@ -17,7 +17,7 @@ export const LandingPage = () => {
 				<PaymentsTile />
 				<SpendingsTile />
 				<AnimatePresence>
-					{activeItem && <DetailsScreen item={activeItem} />}{" "}
+					{activeItem && <DetailsScreen item={activeItem} />}
 				</AnimatePresence>
 			</div>
 		</LayoutGroup>
